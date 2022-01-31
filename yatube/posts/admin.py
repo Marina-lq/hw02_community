@@ -4,16 +4,14 @@ from .models import Group, Post
 
 
 @admin.register(Group, Post)
-
 class PostAdmin(admin.ModelAdmin):
-    
-    fields = (        
+    fields = (
         'pk',
         'text',
         'pub_date',
         'author',
         'group'
-        )
+    )
 
     list_display = (
         'pk',
@@ -25,4 +23,4 @@ class PostAdmin(admin.ModelAdmin):
     list_editable = ('group',)
     search_fields = ('text',)
     list_filter = ('pub_date',)
-    empty_value_display = '-пусто-' 
+    empty_value_display = '-пусто-'
