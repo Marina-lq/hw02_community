@@ -7,7 +7,7 @@ def index(request):
     # в переменную posts будет сохранена выборка из 10 объектов модели Post,
     # отсортированных по полю pub_date
     # по убыванию (от больших значений к меньшим)
-    posts = Post.objects.order_by('-pub_date')[:10]
+    posts = Post.objects.order_by
     # В словаре context отправляем информацию в шаблон
     title = 'Последние обновления на сайте'
     text = 'Последние обновления на сайте'
@@ -31,7 +31,7 @@ def group_posts(request, slug):
     # Метод .filter позволяет ограничить поиск по критериям.
     # Это аналог добавления
     # условия WHERE group_id = {group_id}
-    posts = Post.objects.filter(group=group).order_by('-pub_date')[:10]
+    posts = group.posts.order_by
     context = {
         'group': group,
         'posts': posts,
