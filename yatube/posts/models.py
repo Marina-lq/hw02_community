@@ -3,8 +3,6 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
-POSTS_PER_PAGE = 10
-
 
 class Group(models.Model):
     title = models.CharField(
@@ -30,8 +28,7 @@ class Group(models.Model):
 
 
 class Post(models.Model):
-    class Meta:
-        ordering = [('-pub_date')[:POSTS_PER_PAGE]]
+
     text = models.TextField(
         verbose_name='content'
     )
@@ -51,3 +48,6 @@ class Post(models.Model):
         related_name='posts',
         verbose_name='group'
     )
+
+    class Meta:
+        ordering = ['-pub_date']

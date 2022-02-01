@@ -1,13 +1,15 @@
 from django.shortcuts import render, get_object_or_404
 from posts.models import Post, Group
 
+POSTS_PER_PAGE = 10
+
 
 def index(request):
     # Одна строка вместо тысячи слов на SQL:
     # в переменную posts будет сохранена выборка из 10 объектов модели Post,
     # отсортированных по полю pub_date
     # по убыванию (от больших значений к меньшим)
-    posts = Post.objects.order_by
+    posts = Post.objects.all()[:POSTS_PER_PAGE]
     # В словаре context отправляем информацию в шаблон
     title = 'Последние обновления на сайте'
     text = 'Последние обновления на сайте'
@@ -31,7 +33,7 @@ def group_posts(request, slug):
     # Метод .filter позволяет ограничить поиск по критериям.
     # Это аналог добавления
     # условия WHERE group_id = {group_id}
-    posts = group.posts.order_by
+    posts = group.posts.all()[:POSTS_PER_PAGE]
     context = {
         'group': group,
         'posts': posts,
